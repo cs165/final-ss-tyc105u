@@ -1,22 +1,35 @@
+const googleSheets = require('gsa-sheets');
 const express = require('express');
 const bodyParser = require('body-parser');
-const googleSheets = require('gsa-sheets');
 
-// TODO(you): Update the contents of privateSettings accordingly, as you did
-// in HW5, then uncomment this line.
-// const key = require('./privateSettings.json');
+const key = require('./privateSettings.json');
+const SPREADSHEET_ID ='1KLUDq-FRhHNoDA9104bprKPgbYnqrpit6b4tA1MhwJI';
 
-// TODO(you): Change the value of this string to the spreadsheet id for your
-// GSA spreadsheet, as you did in HW5, then uncomment these lines.
-// const SPREADSHEET_ID = '__YOUR__SPREADSHEET__ID__HERE__';
-// const sheet = googleSheets(key.client_email, key.private_key, SPREADSHEET_ID);
+const sheet = googleSheets(key.client_email, key.private_key, SPREADSHEET_ID);
 
 const app = express();
 const jsonParser = bodyParser.json();
 
 app.use(express.static('public'));
 
-// TODO(you): Add at least 1 GET route and 1 POST route.
+async function onPost(req, res){
+	const target = req.body;
+	var ans=[target.stage , target.link];
+	console.log(ans);
+	sheet.appendRow(ans);
+	res.json(ans);
+}
+app.post('/api', jsonParser, onPost);
+
+async function onGet(req, res) {
+    const result = await sheet.getRows();
+	const rows = result.rows;
+	console.log(rows);
+
+    res.json(rows);
+}
+app.get('/api', onGet);
+
 
 // Please don't change this; this is needed to deploy on Heroku.
 const port = process.env.PORT || 3000;

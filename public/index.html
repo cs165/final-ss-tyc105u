@@ -3,12 +3,60 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
-    <title>CS193x Final Project</title>
+    <title>Car Music Player</title>
     <link rel="stylesheet" href="css/style.css"/>
     <script src="js/script.js" defer></script>
-    </script>
+    <script src="js/SwitchOne.js"></script>
+    <script src="js/SwitchTwo.js"></script>
+    <script src="js/dashboard.js"></script>
   </head>
   <body>
-    <!-- TODO(you): Add the HTML necessary to complete your final project. -->
+  <div id="first">
+    
+    <div class="container">
+      <div class="main">
+
+        <iframe id="myIframe" width=1300px height=700px src="https://www.youtube.com/embed/aiYpDDHKy18?playlist=aiYpDDHKy18&loop=1"></iframe>
+
+        <div class="left">
+          <button class="button" id="S1"><span>40km/h</span></button>
+          <button class="button" id="S2"><span>60km/h</span></button>
+          <button class="button" id="S3"><span>80km/h</span></button>
+          <button class="button" id="S4"><span>100km/h</span></button>
+          <button class="button" id="S5"><span>120km/h</span></button>
+          <button class="button" id="S6"><span>140km/h</span></button>
+        </div>
+        <div  class="right">
+          <p></p>
+          <div class="body" id="video"></div>
+          <div class="body" id="output"></div>
+        </div>
+      </div>
+      <div class="down">
+        <form method="get">
+          <label style="color: whitesmoke; font-size: 2rem">選擇時速(km/h)：
+            <select id="stage" style="font-size: 2rem">
+              <option>40km/h</option>
+              <option>60km/h</option>
+              <option>80km/h</option>
+              <option>100km/h</option>
+              <option>120km/h</option>
+              <option>140km/h</option>
+            </select>
+          </label>
+          <label>
+            <input id="link" style="font-size: 2rem">
+          </label>
+          <label style="color: whitesmoke"><button type="submit">新增歌曲</button></label>
+        </form>
+      </div>
+    </div>
+  </div>
+  <div id="second" class="inactive">
+    <div class="result">
+      <p style="font-size: 1rem; color: whitesmoke" id="PostResult">ok</p>
+      <button id="back" style="font-size: 1rem; color: whitesmoke">back</button>
+    </div>
+  </div>
   </body>
 </html>
